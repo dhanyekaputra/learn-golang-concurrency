@@ -33,8 +33,11 @@ func calcCubes(number int, cubeop chan int) {
 
 }
 
+// goroutine and channel implementation
 func calcTotal() int {
 	number := 982378273819287399
+
+	// sqrch and cubech channel created
 	sqrch := make(chan int)
 	cubech := make(chan int)
 
@@ -44,8 +47,9 @@ func calcTotal() int {
 	// calcCubes goroutine will start
 	go calcCubes(number, cubech)
 
-	// program will stop until sqrch and cubech
-	// receiving data from the function
+	// program will stop until
+	// sqrch channel and cubech channel
+	// receiving data from both goroutine
 	squares, cubes := <-sqrch, <-cubech
 	total := squares + cubes
 
